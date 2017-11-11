@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rapadura</string>
+    <string name="sign_out">Entre logo!</string>
+    <string name="send_button_label">Envie esse capeta</string>
+</resources>
