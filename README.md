@@ -5,8 +5,12 @@ Simple chat to traing firebase integration
 
 # Roadmap
 
-- [ ] Conversations betweent user-user
+- [ ] Conversations between user-user
 - [ ] Groups
 - [ ] Push notifications
-- [ ] Show who sent a message at the bottom of the message
+- [x] Show who sent a message at the bottom of the message
 - [ ] "Saw message"
+- [x] Logout
+- [x] Log In
+- [x] Sign In
+
