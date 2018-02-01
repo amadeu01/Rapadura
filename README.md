@@ -1,7 +1,10 @@
+[![Build Status](https://travis-ci.org/amadeu01/Rapadura.svg?branch=master)](https://travis-ci.org/amadeu01/Rapadura)
+
 # Rapadura
+
 Rapadura chat
 
-Simple chat to traing firebase integration
+Simple chat to training firebase integration
 
 # Roadmap
 
@@ -13,4 +16,5 @@ Simple chat to traing firebase integration
 - [x] Logout
 - [x] Log In
 - [x] Sign In
+- [x] Send Images
 

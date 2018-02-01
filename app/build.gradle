@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.noveogroup.android.check'
 
 android {
     compileSdkVersion 26
@@ -10,9 +11,21 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            storeFile file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -29,7 +42,29 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.google.firebase:firebase-database:11.4.2'
     implementation 'com.google.firebase:firebase-auth:11.4.2'
+    implementation 'com.google.firebase:firebase-storage:11.4.2'
     implementation 'com.firebaseui:firebase-ui-auth:3.1.0'
 
 }
+
+check {
+    abortOnError false
+
+    checkstyle {
+        abortOnError false
+    }
+
+    findbugs {
+        abortOnError false
+        config hard()
+        reportXML new File(project.buildDir, 'reports/findbugs/findbugs.xml')
+    }
+
+    pmd {
+        abortOnError false
+        report new File(project.buildDir, 'reports/pmd')
+    }
+}
+
+
 apply plugin: 'com.google.gms.google-services'
