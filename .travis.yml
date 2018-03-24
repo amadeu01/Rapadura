@@ -45,3 +45,4 @@ before_script:
 
 script:
   - "./gradlew clean build --stacktrace"
+  - "./gradlew connectedCheck"
