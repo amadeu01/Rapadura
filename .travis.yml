@@ -56,7 +56,7 @@ before_deploy:
   - git config --local user.email "amadeu01@gmail.com"
   - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
   - cp $TRAVIS_BUILD_DIR/app/debug.keystore $HOME
-  - cd app/build/outputs/apk/
+  - cd app/build/outputs/apk/release/
   - ls -all
   - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/debug.keystore -storepass $storepass -keypass $keypass app-release-unsigned.apk androiddebugkey
   - jarsigner -verify app-release-unsigned.apk
