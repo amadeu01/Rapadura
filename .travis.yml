@@ -52,8 +52,12 @@ script:
   - "./gradlew connectedCheck"
 
 before_deploy:
-  - cp $TRAVIS_BUILD_DIR/debug.keystore $HOME
+  - git config --local user.name "Amadeu Cavalcante"
+  - git config --local user.email "amadeu01@gmail.com"
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+  - cp $TRAVIS_BUILD_DIR/app/debug.keystore $HOME
   - cd app/build/outputs/apk/
+  - ls -all
   - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/debug.keystore -storepass $storepass -keypass $keypass app-release-unsigned.apk androiddebugkey
 
 deploy:
