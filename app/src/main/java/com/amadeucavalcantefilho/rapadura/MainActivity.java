@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseStorage = FirebaseStorage.getInstance();
 
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages");
         mChatPhotosStorageReference = mFirebaseStorage.getReference().child("chat_photos");
@@ -168,21 +169,21 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Entrou", Toast.LENGTH_SHORT).show();
             } else if (resultCode == RESULT_CANCELED) {
                 finish();
-            } else if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
-                Uri selectedImageUri = data.getData();
-                StorageReference photoReference =
-                        mChatPhotosStorageReference.child(selectedImageUri.getLastPathSegment());
-                photoReference.putFile(selectedImageUri).addOnSuccessListener(this,
-                        new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                                FriendlyMessage friendlyMessage = new FriendlyMessage(null, mUsername, downloadUrl.toString());
-                                mMessagesDatabaseReference.push().setValue(friendlyMessage);
-
-                            }
-                        });
             }
+        } else if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
+            Uri selectedImageUri = data.getData();
+            StorageReference photoReference =
+                    mChatPhotosStorageReference.child(selectedImageUri.getLastPathSegment());
+            photoReference.putFile(selectedImageUri).addOnSuccessListener(this,
+                    new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            FriendlyMessage friendlyMessage = new FriendlyMessage(null, mUsername, downloadUrl.toString());
+                            mMessagesDatabaseReference.push().setValue(friendlyMessage);
+
+                        }
+                    });
         }
     }
 
