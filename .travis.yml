@@ -1,44 +1,42 @@
 language: android
 sudo: required
 jdk: oraclejdk8
-
 before_cache:
- - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
- - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 env:
- global:
- - ANDROID_API_LEVEL=26
- - EMULATOR_API_LEVEL=21
- - ADB_INSTALL_TIMEOUT=5 # minutes
+  global:
+    - ANDROID_API_LEVEL=26
+    - EMULATOR_API_LEVEL=21
+    - ADB_INSTALL_TIMEOUT=5
+    - secure: cyihBe5OiEABEKuqtqXGpd6ekoovfaVS9BYNGnIoEvvEzRwz5Qm5VeL9tDnopx9ikUc9i4gN7m/0wNPyoxtJvEZ5P0Q65NV02V5rtNXq93/oLNkOzqJAWK0lT7sguShDMIN+HAz+0BXo903GmfAETa284hE6Hdh/7qqKfs8akzrJtxPawyTeQWkr2zUMMkANQlbvqKZpzYBxog1oQHiR6aM12an26PxRJxPUdtGcDdt1FI7TUI3XCjLDT9Zrs6DQD4sU9UJ0I1aiceyaMGNsMfuJCklzSiS7W8ayCO/y4Pw4DHGt9GP5+COm0Z+xNMX1zFCFRHyq0RVJPup7UoO3zE71cTS7LsG1QpvnY74JEfigwux2VtFsJSqfo1PZkueSota8+xXXchCzF67VqrZ/EjjILJRJBV/zDcm7+84mJL3rtcycwy7lzFKgsAw9svrGEEteOD9u9TUkZzud+/5jlRCB8tvn30hlL4GnI+ku4o7AoA/X6be2bwHlcpFKQZxrgViDRno1MdBJ7oR9DmBg02xTe7b4do70ZZ7nLX4LtjcVt5HOXHHAxiKKrj1o7Twe/z3EOo3JjVSgyt15lSvcgznAM8onsYAWpGnyJzVH9LvGrHZAuouPUuKrguE9pKx6PdSsn8VrYZtCBvQdEZnhFKCV8Z0I0KzNLNSAwgEsPOs=
+    - secure: l3yt/8H6HLDAhCQfpJs3LBpvnPyij79DPKrQJczDP8o4A64HWfW2cQBye5h2ulcxAYJXI9MUMzFhGQLwb5iiTZx9wTzok44fSpG4G/VkZmleZMpBchwVJNhFQOvDvV0hzAZjUcFgcTpLUQo4k5AWj0W1kZ7JAo9Ufe70GbJXuPucayOG+bHUB6nvAERtwlcNZ4OjHP6bebJaNCXuPQsbx/zhFdJSO9NuSzc4rP7RlzP2X5mrNGJj4UuL/KTIFygTRZt/kumrdSmkFVn+zPWLN6kCC8jbqxQIdClQfJOPJTkc5WdbbLoh1XGJK4N5nyN83EHvTmG4J9NepeDbz9nqc2GeYDeCpkrNm/jso4Gvyf1cd7qc74gp0ALV4/OeZS56J8B9+Q73761mk8WX311b0O9I4ASDmeIXKYhuj3Tfeye2h2rxACRV7amjhDM9/Zl3Wl0tNL8zjmmiYAJ1hyb73cbcFEC+CAhgm9TQb3F70sk2bPQTXGovgVulYaohMrj6FbkIbq2m6rShxeESQkJU+JtWPP74L98pYQMsLDxNQDTvMxpfUoIVR8b9TXBnM3N1AF1B1S/9vqf4R2lx/ZoEgu1HerBu1pF69fPM9qFYGyKIzNbsQNQCeV6nRMpT7V4/5Z6MtgEtTU4LGe+iv5tAioTUkQsQTms5jF2Z/+60Lws=
 
 android:
   components:
-    - tools
-    - platform-tools
-    - build-tools-26.0.2
-    - android-19
-    - android-$ANDROID_API_LEVEL
-    - android-$EMULATOR_API_LEVEL
-    - extra-android-support
-    - extra-android-m2repository
-    - extra-google-m2repository
-    - sys-img-armeabi-v7a-android-19
-    - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL
-    - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
+  - tools
+  - platform-tools
+  - build-tools-26.0.2
+  - android-19
+  - android-$ANDROID_API_LEVEL
+  - android-$EMULATOR_API_LEVEL
+  - extra-android-support
+  - extra-android-m2repository
+  - extra-google-m2repository
+  - sys-img-armeabi-v7a-android-19
+  - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL
+  - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
   licenses:
-    - android-sdk-license-.+
-    - google-gdk-license-.+
-
+  - android-sdk-license-.+
+  - google-gdk-license-.+
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 before_install:
   - openssl aes-256-cbc -K $encrypted_7dfefa55ec0a_key -iv $encrypted_7dfefa55ec0a_iv -in google-services.json.enc -out app/google-services.json -d
   - chmod +x gradlew
-  - ./gradlew dependencies || true
+  - "./gradlew dependencies || true"
 
 before_script:
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
@@ -46,11 +44,23 @@ before_script:
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
+script:
+  - "./gradlew clean build --stacktrace"
+  - "./gradlew connectedCheck"
+
 before_deploy:
   - cp $TRAVIS_BUILD_DIR/example_keystore.jks $HOME
   - cd app/build/outputs/apk/
   - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/example_keystore.jks -storepass $storepass -keypass $keypass app-release-unsigned.apk ExampleKeystoreAlias
 
-script:
-  - "./gradlew clean build --stacktrace"
-  - "./gradlew connectedCheck"
+deploy:
+  provider: releases
+  file: Rapadura.apk
+  skip_cleanup: true
+
+  on:
+    repo: harmittaa/travis-example-android
+    tags: true
+    jdk: oraclejdk8
+  api_key:
+    secure: "mOq3vQeTK8IXLAAB8TC0V58Blp9Ql7cIKAY1gmLws20uRPyWMxhLZPkU3OuEnwTt7/Eya94IetFqx+HKc2bqV9tvTk5KXJjqNcn2V8zHub65I+WqmfbQTM3JrIuyTEQXr6bnRKqghFhKhKSGBI+w37RWSQ5kIAh5qShg9mBNbSs7ZP7OkC5+eNJgQT1OHnufDrjrhks4M5CNGqWgK6vZhb7AHg8e5ay8uwF6Ax4+mh8qsSJOi+VGgz5DDNbx9vg/pOZbWPP+wA1Nwx+SSsSF2Gb4WgreF7tXScDPupd0ABkMcsS/j6aIDqgCFrFMz/0xW8tQeVV6qityFJTay5mVZp6SdMztjKl1Np1ezeWGe2ZUpBnNjmCZEmiwpWOjW2KnpixHBudkQHyF2HMGgZ0jDkDog2PFC39A6hCBRx2o72O7PaHKVTvLAliIVnmsaL38QFqmTDAiuiu8t+nbauEdJazABe+Q41W4USBD7IL/N/KjcKVY15uRHrGSIYOMgItnVBY/3TFWgNji7e9FIcIw+j2T44fv7ZZ6q+uhOcobxHZXQ8OI4aVFL3agUpmH+YFi5ZBayqagWjSmqu8Ct75PrwX1uG5DDspC6PvxVN7QxDSBT97No4WDPNxtcUK0WBkX/eHMCv+drSX4yo5moZdNtnTR3eoz+QMRevmikI1uT2o="
