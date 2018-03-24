@@ -36,7 +36,8 @@ cache:
   - "$HOME/.gradle/wrapper/"
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_7dfefa55ec0a_key -iv $encrypted_7dfefa55ec0a_iv -in debug.keystore.enc -out debug.keystore -d
+  - openssl aes-256-cbc -K $encrypted_7dfefa55ec0a_key -iv $encrypted_7dfefa55ec0a_iv -in secrets.tar.enc -out secrets.tar -d
+  - tar xvf secrets.tar
   - chmod +x gradlew
   - "./gradlew dependencies || true"
 
