@@ -59,6 +59,8 @@ before_deploy:
   - cd app/build/outputs/apk/
   - ls -all
   - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/debug.keystore -storepass $storepass -keypass $keypass app-release-unsigned.apk androiddebugkey
+  - jarsigner -verify app-release-unsigned.apk
+  - "${ANDROID_HOME}/build-tools/24.0.2/zipalign -v 4 app-release-unsigned.apk Rapadura.apk"
 
 deploy:
   provider: releases
